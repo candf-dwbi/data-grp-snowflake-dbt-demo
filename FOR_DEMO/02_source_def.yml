@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: customer_db
+    description: Customer data
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: CUSTOMER

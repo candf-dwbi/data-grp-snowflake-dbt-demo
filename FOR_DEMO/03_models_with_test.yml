@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: customer_db
+    description: Customer data
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: CUSTOMER
+
+models:
+    - name: marketing_customer
+      description: "Customer for marketing with Home, Car and balacne > 1000"
+      columns:
+          - name: C_CUSTKEY
+            description: "Unique identifier of the Customer"
+            tests:
+                - unique
+                - not_null
+          - name: C_NAME
+            description: "Customer Name"
+            tests:
+                - not_null
+          - name: c_mktsegment
+            description: "Segment Name"
+            tests:
+                - accepted_values:
+                    values: ['BUILDING', 'AUTOMOBILE', 'HOUSEHOLD']
+
+# dbt test --select marketing_customer                    
